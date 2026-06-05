@@ -1,0 +1,2609 @@
+import { useState } from "react";
+
+const topics = [
+  {
+    id: 1,
+    title: "01 - Installation aur Setup",
+    emoji: "🛠️",
+    color: "#FF6B35",
+    content: [
+      {
+        heading: "Python Download Karna",
+        theory: `Bhai, sabse pehle Python download karna hoga. Kisi bhi browser mein jao aur 'python.org' pe jao. Wahan se apne operating system ke liye Python download karo. Install karne ke baad tumhe milega Python Virtual Machine (PVM) — yeh tumhara code leke use byte code mein convert karta hai, jo computer samajh sake.`,
+        code: `# Python version check karo terminal mein:
+python --version
+# ya
+python3 --version
+
+# Output aayega kuch aisa:
+# Python 3.11.4`,
+        example: `Python ek baar install ho gaya toh tum terminal kholo aur 'python' type karo. REPL (interactive mode) khul jaayega jahan tum seedha code likh ke test kar sakte ho.`
+      },
+      {
+        heading: "IDE - VS Code Setup",
+        theory: `IDE matlab Integrated Development Environment. Yeh ek software hai jahan tum code likhte ho, chalate ho aur debug karte ho. Famous IDEs hain: VS Code, PyCharm, Jupyter Notebook. Hum VS Code use karenge kyunki yeh lightweight aur powerful hai.`,
+        code: `# VS Code install karne ke baad:
+# 1. Extensions tab kholo (Ctrl+Shift+X)
+# 2. "Python" by Microsoft install karo
+# 3. "Code Runner" by Jun Han install karo
+
+# Ab tum .py file bana ke code run kar sakte ho`,
+        example: `VS Code mein naya file banao: 'File > New File', phir save karo .py extension ke saath (jaise: hello.py). Ab code likho aur Ctrl+Alt+N se run karo!`
+      },
+      {
+        heading: "Pehla Program",
+        theory: `Traditional pehla program "Hello World" hota hai, lekin hum thoda alag karenge! Chalte hain kuch interesting likhte hain.`,
+        code: `# Pehla program - Hello World se better!
+print("Jai Hind! Main Python seekh raha hoon!")
+print("Mera naam:", "Rahul")
+print("Meri age:", 20)
+
+# Output:
+# Jai Hind! Main Python seekh raha hoon!
+# Mera naam: Rahul
+# Meri age: 20`,
+        example: `print() function screen pe kuch bhi print karta hai. Tum text (strings) aur numbers dono print kar sakte ho.`
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "02 - Comments aur Variables",
+    emoji: "📝",
+    color: "#4ECDC4",
+    content: [
+      {
+        heading: "Comments kya hote hain?",
+        theory: `Comments woh lines hote hain jo Python interpreter ignore kar deta hai. Yeh sirf programmers ke liye hote hain — code samjhane ke liye. Python mein single-line comment ke liye '#' use karte hain. Multi-line comment ke liye """triple quotes""" use karte hain (isko docstring bhi kehte hain).`,
+        code: `# Yeh ek single-line comment hai
+# Python ise ignore karega
+
+"""
+Yeh ek
+multi-line comment hai
+ise docstring bhi kehte hain
+"""
+
+print("Hello")  # Yeh bhi comment hai - inline comment`,
+        example: `Jab tum team mein kaam karte ho toh comments bahut important hote hain. Doosra developer padh ke samajh sake ki yeh code kya kar raha hai!`
+      },
+      {
+        heading: "Variables - Data Store Karna",
+        theory: `Variables ek tarah ke boxes hain jahan hum data store karte hain. Python mein variable banana bahut aasaan hai — bas naam likho, = likho, aur value do. Python mein type declare nahi karna padta (unlike C/Java)!`,
+        code: `# Variables banana
+naam = "Akarsh"          # String variable
+age = 25                 # Integer variable
+height = 5.9             # Float variable
+is_student = True        # Boolean variable
+
+# Variables print karna
+print(naam)    # Output: Akarsh
+print(age)     # Output: 25
+print(height)  # Output: 5.9
+
+# Multiple variables ek saath
+a = b = c = 10   # Teeno same value
+x, y, z = 1, 2, 3  # Different values`,
+        example: `Socho variable ek labelled dabbi hai. 'naam = "Rahul"' matlab ek dabbi hai jiska label hai 'naam' aur usme rakha hai "Rahul".`
+      },
+      {
+        heading: "Variable Rules aur Naming Conventions",
+        theory: `Kuch rules hain variable naam ke liye jo todne nahi chahiye, aur kuch conventions hain jo follow karna professional practice hai.`,
+        code: `# ✅ SAHI variable names
+student_name = "Rahul"     # snake_case
+studentAge = 20            # camelCase  
+StudentCity = "Delhi"      # PascalCase
+_private_var = "hidden"    # underscore se shuru
+
+# ❌ GALAT variable names
+# 2name = "Rahul"    # Error! Number se shuru nahi ho sakta
+# my name = "Rahul"  # Error! Space allowed nahi
+# my-name = "Rahul"  # Error! Hyphen allowed nahi
+
+# Python ke reserved keywords use mat karo:
+# if, else, for, while, class, def, etc.
+
+# 3 Naming Conventions:
+camelCase = "sheryiansSchool"    # Camel Case
+PascalCase = "SheryiansSchool"   # Pascal Case
+snake_case = "sheryians_school"  # Snake Case (Python prefer karta hai)`,
+        example: `Python mein snake_case sabse popular hai. Jab tum library code padhoge toh zyada snake_case milega. Variable naam meaningful rakho jaise 'age' > 'a'.`
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "03 - Data Types",
+    emoji: "📦",
+    color: "#A8E6CF",
+    content: [
+      {
+        heading: "Numbers - Integer, Float, Complex",
+        theory: `Numbers teech tarah ke hote hain Python mein. Integer (int) woh numbers hain jisme decimal nahi hota. Float woh hain jisme decimal hota hai. Complex woh hain jisme real aur imaginary part hota hai (mathematics wali).`,
+        code: `# Integer - Decimal ke bina poore numbers
+age = 25
+marks = 450
+negative = -10
+
+# Float - Decimal wale numbers
+price = 99.99
+pi = 3.14159
+percentage = 85.5
+
+# Complex - Real + Imaginary (j imaginary unit hai)
+c1 = 3 + 4j
+c2 = 2 - 1j
+
+# type() function se data type check karo
+print(type(age))        # <class 'int'>
+print(type(price))      # <class 'float'>
+print(type(c1))         # <class 'complex'>
+
+# Basic operations
+print(10 + 3)    # 13
+print(10 / 3)    # 3.333... (float)
+print(10 // 3)   # 3 (floor division - int)`,
+        example: `Ghar ki savings = 50000 → Integer. Petrol ka price = 96.50 → Float. Engineering mein electric current = 3+4j → Complex.`
+      },
+      {
+        heading: "Strings",
+        theory: `String matlab text data. Python mein kuch bhi quotes mein likho — single ('') ya double ("") dono work karte hain. String keyboard pe jo bhi character hai woh store kar sakta hai.`,
+        code: `# String banane ke tarike
+name1 = 'Rahul'           # Single quotes
+name2 = "Priya"           # Double quotes
+message = "Kya haal hai?" # Sentence
+
+# Multi-line string
+poem = """
+Roses are red,
+Violets are blue,
+Python hai sabse best,
+Mujhe lagta hai tu bhi jaanta hai yeh!
+"""
+
+# String ke andar quotes
+quote1 = "He said 'hello' to me"
+quote2 = 'She replied "namaste" back'
+
+print(name1)
+print(message)
+print(poem)`,
+        example: `String ka use everywhere hota hai — naam, address, messages, email content. Jo bhi text hota hai woh string mein store hota hai.`
+      },
+      {
+        heading: "Boolean",
+        theory: `Boolean sirf 2 values rakhta hai: True ya False. Yeh conditions check karne mein use hota hai. Dhyan rakho: Python mein True aur False capital T aur F se likhte hain.`,
+        code: `# Boolean values
+is_adult = True
+is_student = False
+has_id = True
+
+print(type(is_adult))   # <class 'bool'>
+
+# Boolean expressions se True/False aata hai
+print(10 > 5)           # True
+print(10 < 5)           # False
+print(10 == 10)         # True
+print("abc" == "ABC")   # False
+
+# Bool conversion
+print(bool(1))          # True
+print(bool(0))          # False
+print(bool("hello"))    # True
+print(bool(""))         # False (empty string)
+print(bool([]))         # False (empty list)`,
+        example: `Login system mein: is_logged_in = True/False. Age check mein: is_adult = (age >= 18). Ye sab Boolean ka use karte hain!`
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: "04 - Strings Deep Dive",
+    emoji: "🔤",
+    color: "#FFD93D",
+    content: [
+      {
+        heading: "String Unicode aur Internals",
+        theory: `Har character ka ek unique number hota hai — ise Unicode kehte hain. 'A' ka Unicode 65 hai. Isliye String doosre data types se zyada space leta hai, kyunki har character alag store hota hai. Python mein ord() function character ka Unicode deta hai, aur chr() function number se character deta hai.`,
+        code: `# Unicode check karna
+print(ord('A'))      # 65
+print(ord('a'))      # 97
+print(ord('B'))      # 66
+print(ord(' '))      # 32 (space)
+
+# Number se character banana
+print(chr(65))       # A
+print(chr(97))       # a
+print(chr(9829))     # ♥ (heart emoji!)
+
+# String ka size
+name = "Rahul"
+print(len(name))     # 5 (5 characters)
+
+# String repeated
+print("Ha" * 3)      # HaHaHa`,
+        example: `Jab tum kisi website pe password store karte ho toh woh Unicode values mein convert hota hai. Isliye "ABC" != "abc" kyunki A=65, a=97 hain!`
+      },
+      {
+        heading: "String Indexing",
+        theory: `String ke har character ka ek position number hota hai jise index kehte hain. Yeh 0 se shuru hota hai. Negative indexing bhi hoti hai — jisme -1 last character hota hai.`,
+        code: `name = "Python"
+#       P  y  t  h  o  n
+# Index: 0  1  2  3  4  5
+# Neg:  -6 -5 -4 -3 -2 -1
+
+# Positive indexing
+print(name[0])    # P (pehla character)
+print(name[1])    # y
+print(name[5])    # n (last character)
+
+# Negative indexing (peeche se)
+print(name[-1])   # n (last character)
+print(name[-2])   # o (second last)
+print(name[-6])   # P (first character)
+
+# Length check
+print(len(name))  # 6
+
+# Common error:
+# print(name[10])  # IndexError! 10th position nahi hai`,
+        example: `Socho "Python" ek array of boxes hai. Box[0] mein 'P' hai, Box[1] mein 'y' hai. Negative mein Box[-1] last box hai jisme 'n' hai.`
+      },
+      {
+        heading: "String Slicing",
+        theory: `Slicing matlab string ka ek hissa kaat ke nikalana. Format hai: string[start:stop:step]. Stop index include nahi hota — matlab stop se ek pehle tak kaarega!`,
+        code: `text = "Hello World"
+#       H  e  l  l  o     W  o  r  l  d
+# Index: 0  1  2  3  4  5  6  7  8  9  10
+
+# Basic slicing [start:stop]
+print(text[0:5])    # Hello (0 to 4)
+print(text[6:11])   # World (6 to 10)
+print(text[0:5:1])  # Hello (step=1, default)
+
+# Start ya stop chhod sakte hain
+print(text[:5])     # Hello (start se 0 default)
+print(text[6:])     # World (stop se end tak)
+print(text[:])      # Hello World (poora string)
+
+# Step use karna
+print(text[::2])    # HloWrd (har doosra character)
+print(text[::-1])   # dlroW olleH (reverse!)
+
+# Practical example
+email = "rahul@gmail.com"
+print(email[:5])    # rahul (username)`,
+        example: `Date string: date = "2024-01-15". Year: date[:4] → "2024", Month: date[5:7] → "01", Day: date[8:] → "15". Aise slicing real life mein use hoti hai!`
+      },
+      {
+        heading: "Type Conversion",
+        theory: `Kabhi kabhi ek data type ko doosre mein convert karna padta hai. Iske liye built-in functions hain: int(), float(), str(), bool(). Yeh Explicit conversion hai. Python kabhi kabhi khud bhi convert kar leta hai — use Implicit conversion kehte hain.`,
+        code: `# Explicit Conversion (hum karte hain)
+a = "123"
+b = int(a)         # String se Integer
+print(b + 10)      # 133
+
+c = 3.14
+d = int(c)         # Float se Integer (decimal cut ho jaata hai)
+print(d)           # 3
+
+e = 100
+f = str(e)         # Integer se String
+print(f + " rupees")  # "100 rupees"
+
+g = 0
+print(bool(g))     # False
+print(bool(100))   # True
+
+# Implicit Conversion (Python khud karta hai)
+x = 5
+y = 2.0
+z = x + y          # int + float = float (auto convert)
+print(z)           # 7.0
+print(type(z))     # <class 'float'>
+
+# Input always string aata hai!
+age_str = input("Age enter karo: ")  # "25" (string)
+age = int(age_str)                    # 25 (integer)`,
+        example: `Calculator app mein: user ne "50" enter kiya (string). Tum use int("50") karke 50 (integer) banate ho, tab add/subtract karte ho. Yeh type conversion hai!`
+      },
+      {
+        heading: "Truthy aur Falsy Values",
+        theory: `Python mein sirf 7 Falsy values hain — baki sab True hoti hain. Yeh samajhna bahut important hai kyunki conditions mein yeh use hota hai.`,
+        code: `# 7 Falsy Values (yeh sab False banenge)
+print(bool(0))      # False - zero integer
+print(bool(0.0))    # False - zero float
+print(bool(False))  # False - False itself
+print(bool(""))     # False - empty string
+print(bool([]))     # False - empty list
+print(bool({}))     # False - empty dict/set
+print(bool(()))     # False - empty tuple
+
+# Truthy Values (yeh sab True banenge)
+print(bool(1))          # True
+print(bool(-5))         # True (koi bhi non-zero number)
+print(bool("hello"))    # True
+print(bool([1, 2, 3]))  # True
+print(bool(0.001))      # True
+
+# Practical use
+password = input("Password: ")
+if password:  # Agar empty nahi hai toh True
+    print("Password set ho gaya!")
+else:
+    print("Password empty hai!")`,
+        example: `Login mein: agar user ne kuch bhi type nahi kiya toh password = "" (empty string) → Falsy → condition fail → "Please enter password" dikhao!`
+      }
+    ]
+  },
+  {
+    id: 5,
+    title: "05 - Input/Output aur Operators",
+    emoji: "⌨️",
+    color: "#C3B1E1",
+    content: [
+      {
+        heading: "Output - print() function",
+        theory: `Output matlab screen pe kuch dikhana. Python mein sirf print() function use hota hai. Print mein hum normal text, variables, aur formatted strings use kar sakte hain.`,
+        code: `# Basic print
+print("Namaste!")
+print(42)
+print(3.14)
+
+# Multiple values print karna
+name = "Rahul"
+age = 20
+print("Naam:", name, "Age:", age)
+
+# f-string (formatted string) - sabse clean way
+print(f"Mera naam {name} hai aur meri age {age} hai")
+
+# end parameter (default newline hota hai)
+print("Hello", end=" ")
+print("World")  # Output: Hello World (same line)
+
+# sep parameter (separator)
+print("A", "B", "C", sep="-")  # Output: A-B-C
+
+# Special characters
+print("Line 1\nLine 2")   # \n newline
+print("Tab\there")        # \t tab space`,
+        example: `ATM machine pe jab "Your balance is ₹5000" dikhta hai, wahan print() jaisa kuch use hota hai backend mein. f-strings se data aur text combine karte hain!`
+      },
+      {
+        heading: "Input - User se Data Lena",
+        theory: `input() function user se keyboard pe kuch type karaata hai. Ek important baat — input() HAMESHA string return karta hai, chahe user number type kare! Isliye manually convert karna padta hai.`,
+        code: `# Basic input
+naam = input("Apna naam batao: ")
+print(f"Namaste, {naam}!")
+
+# Number input karna
+age_str = input("Apni age batao: ")
+age = int(age_str)   # String ko Integer mein convert karo
+print(f"Aap {age} saal ke ho")
+
+# Shorthand mein
+salary = float(input("Salary batao: "))  # Direct convert
+print(f"Aapki salary: ₹{salary}")
+
+# Multiple inputs
+a = int(input("Pehla number: "))
+b = int(input("Doosra number: "))
+print(f"Sum = {a + b}")
+print(f"Product = {a * b}")
+
+# Practice question answer:
+# Q: User se 2 numbers lo aur add karo
+x = int(input("Number 1: "))
+y = int(input("Number 2: "))
+print("Total:", x + y)`,
+        example: `Online form mein naam, email, age fill karte ho — woh sab input() ki tarah kaam karta hai. Backend mein data receive hota hai aur phir process hota hai!`
+      },
+      {
+        heading: "Arithmetic Operators",
+        theory: `Arithmetic operators mathematical operations karte hain. Python mein 7 arithmetic operators hain. Normal calculator ki tarah kaam karte hain!`,
+        code: `a = 15
+b = 4
+
+print(a + b)    # 19  - Addition (jodna)
+print(a - b)    # 11  - Subtraction (ghatana)
+print(a * b)    # 60  - Multiplication (gunna)
+print(a / b)    # 3.75 - Division (bhagna - always float)
+print(a // b)   # 3   - Floor Division (poora quotient)
+print(a % b)    # 3   - Modulus (baaki - remainder)
+print(a ** b)   # 50625 - Exponentiation (power)
+
+# Practical examples
+# Circle ka area
+import math
+radius = 7
+area = math.pi * radius ** 2
+print(f"Area = {area:.2f}")   # .2f = 2 decimal places
+
+# Even ya odd check (% use karke)
+number = 17
+remainder = number % 2
+print(f"{number} is {'Even' if remainder == 0 else 'Odd'}")`,
+        example: `Shopping cart mein: total = price * quantity + shipping - discount. Yahan sab arithmetic operators use ho rahe hain!`
+      },
+      {
+        heading: "Assignment aur Compound Operators",
+        theory: `Assignment operator (=) variable ko value deta hai. Compound operators arithmetic aur assignment combine karte hain. Yeh shorthand hai!`,
+        code: `# Basic assignment
+x = 10
+print(x)    # 10
+
+# Reassignment
+x = 20
+print(x)    # 20 (purana value gone)
+
+# Compound Assignment Operators
+score = 100
+score += 10    # score = score + 10 → 110
+print(score)   # 110
+
+score -= 20    # score = score - 20 → 90
+print(score)   # 90
+
+score *= 2     # score = score * 2 → 180
+print(score)   # 180
+
+score //= 3    # score = score // 3 → 60
+print(score)   # 60
+
+score %= 7     # score = score % 7 → 4
+print(score)   # 4
+
+score **= 2    # score = score ** 2 → 16
+print(score)   # 16
+
+# Counter pattern (bahut use hota hai loops mein)
+count = 0
+count += 1   # 1
+count += 1   # 2
+count += 1   # 3
+print(count) # 3`,
+        example: `Game mein score tracking: har collectible ke liye score += 10. Lives lose karne pe lives -= 1. Compound operators daily code mein bahut aate hain!`
+      },
+      {
+        heading: "Comparison aur Logical Operators",
+        theory: `Comparison operators do values compare karte hain aur True/False dete hain. Logical operators multiple conditions combine karte hain.`,
+        code: `# Comparison Operators
+a, b = 10, 20
+
+print(a == b)    # False  - Equal to
+print(a != b)    # True   - Not equal to
+print(a > b)     # False  - Greater than
+print(a < b)     # True   - Less than
+print(a >= 10)   # True   - Greater than or equal
+print(a <= 10)   # True   - Less than or equal
+
+# String comparison (ASCII/Unicode values compare hote hain)
+print("abc" == "abc")    # True
+print("ABC" < "abc")     # True (A=65, a=97; uppercase chota)
+print("apple" > "banana") # False (a vs b compare hota hai)
+
+# Logical Operators
+x = True
+y = False
+
+print(x and y)   # False (dono True chahiye)
+print(x or y)    # True  (ek bhi True ho)
+print(not x)     # False (opposite)
+
+# Practical example
+age = 25
+has_id = True
+
+# Voter eligible check
+if age >= 18 and has_id:
+    print("Voting eligible ho!")
+
+# Trivial Questions (book se):
+print(126 > 130)                          # False
+print((456 == 456) != (235 == 236))       # True
+print(12 < 10 or 45 == 56 or 69 > 70 or 15 != 13)  # True
+print(True and bool(0))                   # False`,
+        example: `Online shopping: (price < budget) and (in_stock) and (rating > 4) → Tab hi buy karo! Multiple conditions check karna Logical operators se hota hai.`
+      }
+    ]
+  },
+  {
+    id: 6,
+    title: "06 - Conditional Statements",
+    emoji: "🔀",
+    color: "#FF8B94",
+    content: [
+      {
+        heading: "if Statement",
+        theory: `Conditional statements program ka flow control karte hain. Jaise real life mein: "Agar baarish ho toh chhatri lo." Python mein iske liye if, elif, else use karte hain. Yeh Control Flow Statements bhi kehte hain.`,
+        code: `# Simple if statement
+marks = 75
+
+if marks >= 40:
+    print("Passed!")     # Yeh tabhi chalega jab marks >= 40
+
+# if else
+age = 16
+
+if age >= 18:
+    print("Adult hai tum!")
+else:
+    print("Abhi minor ho!")
+
+# Nested if
+score = 85
+
+if score >= 90:
+    print("Grade: A+")
+else:
+    if score >= 80:
+        print("Grade: A")   # Yeh chalega
+    else:
+        print("Grade: B")`,
+        example: `ATM mein: if balance >= withdrawal_amount → paise do. else → "Insufficient funds" dikhao.`
+      },
+      {
+        heading: "if-elif-else Ladder",
+        theory: `Jab multiple conditions check karni ho toh if-elif-else use karte hain. elif matlab "else if" — pehli condition fail ho tab doosri check karo.`,
+        code: `# if-elif-else example
+marks = 75
+
+if marks >= 90:
+    print("Grade: A+")
+elif marks >= 80:
+    print("Grade: A")
+elif marks >= 70:
+    print("Grade: B")   # Yeh chalega (75 >= 70)
+elif marks >= 60:
+    print("Grade: C")
+elif marks >= 40:
+    print("Grade: D")
+else:
+    print("Fail!")
+
+# Temperature example (book se):
+temp = 35
+
+if temp < 0:
+    print("Freezing Cold! ❄️")
+elif temp < 10:
+    print("Very Cold! 🥶")
+elif temp < 20:
+    print("Cold! 🌧️")
+elif temp < 30:
+    print("Pleasant! 😊")
+elif temp < 40:
+    print("Hot! ☀️")   # Yeh chalega
+else:
+    print("Very Hot! 🔥")
+
+# Q1: Do numbers mein se bada kaunsa?
+a = int(input("Pehla number: "))
+b = int(input("Doosra number: "))
+
+if a > b:
+    print(f"{a} bada hai")
+elif b > a:
+    print(f"{b} bada hai")
+else:
+    print("Dono barabar hain")`,
+        example: `Instagram pe: if followers > 1M → "Mega Influencer". elif followers > 100K → "Macro Influencer". elif followers > 10K → "Micro Influencer". else → "Nano Influencer"!`
+      },
+      {
+        heading: "Practice Questions Solutions",
+        theory: `Book ke questions solve karte hain — yeh sab real interviews mein bhi poocha jaata hai!`,
+        code: `# Q2: Gender ke basis pe greeting
+gender = input("Gender (M/F): ").upper()
+
+if gender == "M":
+    print("Good Morning Sir!")
+elif gender == "F":
+    print("Good Morning Ma'am!")
+else:
+    print("Good Morning!")
+
+# Q3: Even ya Odd
+num = int(input("Number do: "))
+if num % 2 == 0:
+    print(f"{num} Even hai")
+else:
+    print(f"{num} Odd hai")
+
+# Q4: Voter eligibility
+name = input("Naam: ")
+age = int(input("Age: "))
+if age >= 18:
+    print(f"Hello {name}, aap valid voter ho! ✅")
+else:
+    print(f"Hello {name}, aap abhi voter nahi ho! ❌")
+
+# Q5: Leap Year
+year = int(input("Year do: "))
+if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+    print(f"{year} Leap Year hai! 🗓️")
+else:
+    print(f"{year} Leap Year nahi hai!")`,
+        example: `Leap year 2024 mein check: 2024 % 4 = 0 (True) AND 2024 % 100 = 24 (not 0, True) → Leap Year! 2100: 2100%4=0 (True) but 2100%100=0 (False) → Not Leap Year!`
+      }
+    ]
+  },
+  {
+    id: 7,
+    title: "07 & 08 - Loops (For & While)",
+    emoji: "🔄",
+    color: "#FFA07A",
+    content: [
+      {
+        heading: "Loops ka Concept",
+        theory: `Bhai, socho tumhe 100 baar "Hello World" print karna hai. Bina loop ke 100 lines likhni padegi! Loop se sirf 2-3 lines mein kaam ho jaata hai. Python mein 2 types of loops hain: For loop (jab iterations pata ho) aur While loop (jab condition pata ho, iterations nahi).`,
+        code: `# Bina loop ke (boring!):
+print("Hello World")
+print("Hello World")
+print("Hello World")
+# ... 97 baar aur likhna padega
+
+# Loop ke saath (smart!):
+for i in range(100):
+    print("Hello World")   # Sirf 2 lines!
+
+# Bucket analogy:
+# FOR loop: "4 mugs paani daalna hai" (exact count pata hai)
+# WHILE loop: "bucket empty hone tak daalna hai" (condition pata hai)`,
+        example: `Instagram pe jab tum "View All 500 Comments" dabhate ho, tab backend mein ek loop sab comments ek ek karke fetch karta hai!`
+      },
+      {
+        heading: "range() Function",
+        theory: `For loop ke saath range() function bahut use hota hai. Yeh number sequence generate karta hai. Syntax: range(start, stop, step). Start default 0, step default 1 hota hai.`,
+        code: `# range() examples
+print(list(range(5)))          # [0, 1, 2, 3, 4]
+print(list(range(1, 6)))       # [1, 2, 3, 4, 5]
+print(list(range(1, 10, 2)))   # [1, 3, 5, 7, 9] (step 2)
+print(list(range(10, 0, -1)))  # [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+# For loop with range
+for i in range(1, 6):
+    print(i, end=" ")    # 1 2 3 4 5
+print()  # newline
+
+# Q1: 1 se n tak print karo
+n = int(input("N: "))
+for i in range(1, n+1):
+    print(i, end=" ")
+
+# Q4: Number ka table
+num = int(input("Table kiska: "))
+for i in range(1, 11):
+    print(f"{num} x {i} = {num * i}")`,
+        example: `Jab YouTube pe "1 to 10 videos" load hoti hain, background mein range(1, 11) jaisi cheez kaam kar rahi hoti hai — 10 videos sequentially fetch karna!`
+      },
+      {
+        heading: "For Loop - Strings ke saath",
+        theory: `For loop sirf numbers ke liye nahi hai! String ke har character pe bhi loop kar sakte hain — directly ya index ke through.`,
+        code: `# Direct iteration (direct character milta hai)
+name = "Python"
+for char in name:
+    print(char, end=" ")  # P y t h o n
+print()
+
+# Index ke through (number milta hai)
+for i in range(len(name)):
+    print(f"Index {i}: {name[i]}")
+# Index 0: P
+# Index 1: y
+# Index 2: t ... etc
+
+# Q: String reverse karo without built-in
+word = "hello"
+reversed_word = ""
+for i in range(len(word) - 1, -1, -1):
+    reversed_word += word[i]
+print(reversed_word)  # olleh
+
+# Q: Palindrome check
+s = input("String do: ").lower()
+rev = s[::-1]
+if s == rev:
+    print(f"'{s}' Palindrome hai! ✅")
+else:
+    print(f"'{s}' Palindrome nahi hai! ❌")`,
+        example: `"MADAM" palindrome hai kyunki reverse bhi "MADAM" hai. DNA sequence check mein bhi palindrome concept use hota hai!`
+      },
+      {
+        heading: "break, continue, else",
+        theory: `break loop turant band kar deta hai. continue current iteration skip kar deta hai. else loop ke baad chalata hai — lekin sirf tab jab break nahi hua ho!`,
+        code: `# BREAK example
+print("--- BREAK ---")
+for i in range(1, 11):
+    if i == 6:
+        break      # 6 par loop band ho jaayega
+    print(i, end=" ")
+# Output: 1 2 3 4 5
+
+# CONTINUE example
+print("\n--- CONTINUE ---")
+for i in range(1, 11):
+    if i % 2 == 0:
+        continue   # Even numbers skip
+    print(i, end=" ")
+# Output: 1 3 5 7 9
+
+# ELSE with loop
+print("\n--- ELSE ---")
+for i in range(1, 6):
+    print(i, end=" ")
+else:
+    print("\nLoop complete hua! (No break)")
+# else tab nahi chalega jab break ho
+
+# Q: Prime check with break and else
+num = int(input("\nPrime check karo: "))
+for i in range(2, num):
+    if num % i == 0:
+        print(f"{num} Prime nahi hai!")
+        break
+else:
+    print(f"{num} Prime hai! ✅")`,
+        example: `Race track mein: 20 laps karne hain (for loop). 16th lap pe baarish aayi (condition true) → break! Lekin Race official ne flag dikhaaya (continue) → ek lap skip karo, baki chalte raho.`
+      },
+      {
+        heading: "For Loop Practice",
+        theory: `Book ke important questions solve karte hain — yeh fundamentals clear karte hain aur interviews mein aate hain!`,
+        code: `# Q5: Sum up to n
+n = int(input("N: "))
+total = 0
+for i in range(1, n+1):
+    total += i
+print(f"Sum = {total}")
+# Formula check: n*(n+1)/2
+
+# Q6: Factorial
+num = int(input("Factorial: "))
+fact = 1
+for i in range(1, num+1):
+    fact *= i
+print(f"{num}! = {fact}")
+
+# Q7: Even aur Odd sum alag alag
+n = int(input("Range: "))
+even_sum = odd_sum = 0
+for i in range(1, n+1):
+    if i % 2 == 0:
+        even_sum += i
+    else:
+        odd_sum += i
+print(f"Even sum: {even_sum}, Odd sum: {odd_sum}")
+
+# Q8: Factors of a number
+num = int(input("Factors: "))
+print(f"Factors of {num}:", end=" ")
+for i in range(1, num+1):
+    if num % i == 0:
+        print(i, end=" ")
+
+# Q: Characters/Digits/Symbols count
+s = "P@#yn26at^&i5ve"
+chars = digits = symbols = 0
+for c in s:
+    if c.isalpha():
+        chars += 1
+    elif c.isdigit():
+        digits += 1
+    else:
+        symbols += 1
+print(f"Chars={chars}, Digits={digits}, Symbols={symbols}")
+# Chars=8, Digits=3, Symbols=4`,
+        example: `Factorial 5! = 5×4×3×2×1 = 120. Calculator mein n! button yahi kaam karta hai loop ke through!`
+      },
+      {
+        heading: "While Loop",
+        theory: `While loop tab use karte hain jab iterations pata nahi ho — sirf condition pata ho. Yeh loop tab tak chalta hai jab tak condition True hai. Dhyan rakho: infinite loop ka risk hota hai, toh condition update karte raho!`,
+        code: `# Basic while loop
+count = 1
+while count <= 5:
+    print(count, end=" ")
+    count += 1    # Yeh update zaroori hai!
+# Output: 1 2 3 4 5
+
+# Q: Number reverse karna
+num = int(input("Number do: "))
+original = num
+reversed_num = 0
+
+while num > 0:
+    digit = num % 10       # Last digit nikalo
+    reversed_num = reversed_num * 10 + digit  # Add karo
+    num = num // 10        # Last digit hataao
+    
+print(f"Reverse of {original} = {reversed_num}")
+
+# Q: Palindrome number check
+num = int(input("Number: "))
+original = num
+rev = 0
+while num > 0:
+    rev = rev * 10 + num % 10
+    num //= 10
+print("Palindrome!" if original == rev else "Not Palindrome!")
+
+# Q: Number guessing game!
+import random
+target = random.randint(1, 100)
+attempts = 0
+
+while True:
+    guess = int(input("Guess (1-100): "))
+    attempts += 1
+    if guess < target:
+        print("Chota hai! ⬆️")
+    elif guess > target:
+        print("Bada hai! ⬇️")
+    else:
+        print(f"Sahi! 🎉 {attempts} attempts lage!")
+        break`,
+        example: `WhatsApp mein "Keep trying connection" — jab tak network nahi milta, try karta rehta hai. Yeh while loop pattern hai: while not connected → try_again()!`
+      }
+    ]
+  },
+  {
+    id: 8,
+    title: "10 - Functions",
+    emoji: "⚙️",
+    color: "#87CEEB",
+    content: [
+      {
+        heading: "Functions kya hain?",
+        theory: `Function ek reusable block of code hai jo ek specific kaam karta hai. Python mein bahut saare built-in functions hain: print(), input(), len(), type(). Tum apne khud ke functions bana sakte ho — inhe user-defined functions kehte hain. Functions se code DRY (Don't Repeat Yourself) rehta hai.`,
+        code: `# Function banana
+def greet():                  # 'def' keyword, phir naam
+    print("Namaste Bhai!")    # Function body (indented)
+    print("Kya haal hai?")
+
+# Function call karna
+greet()      # Output: Namaste Bhai!
+greet()      # Same function dobara call!
+greet()      # Aur ek baar!
+
+# Bina function ke (repetition):
+# print("Namaste Bhai!")
+# print("Kya haal hai?")
+# print("Namaste Bhai!")   # Copy paste ki problem
+# print("Kya haal hai?")
+
+# Return value wala function
+def add(a, b):
+    result = a + b
+    return result          # Value wapas deta hai
+
+total = add(5, 3)
+print(total)               # 8
+print(add(100, 200))       # 300 (directly use karo)`,
+        example: `Bank mein "calculate_interest(principal, rate, time)" ek baar banao, 1000 customers ke liye baar baar call karo! Yahi function ka fayda hai.`
+      },
+      {
+        heading: "Parameters aur Arguments",
+        theory: `Parameters function definition mein hote hain (variables ki tarah). Arguments function call karte waqt pass karte hain (actual values). Positional arguments order mein match karte hain.`,
+        code: `# Parameters vs Arguments
+def introduce(name, age, city):   # name, age, city = parameters
+    print(f"Main {name} hoon, {age} saal ka, {city} se!")
+
+# Arguments pass karna
+introduce("Rahul", 20, "Delhi")   # "Rahul", 20, "Delhi" = arguments
+introduce("Priya", 18, "Mumbai")  # Doosra call, different arguments
+
+# Positional argument rule:
+# Pehla argument → pehla parameter
+# Doosra → doosra, aur aise hi
+
+# Wrong (but Python chalayega kuch toh):
+introduce("Delhi", 20, "Rahul")   # Order matter karta hai!
+# Main Delhi hoon, 20 saal ka, Rahul se! (Galat meaning!)`,
+        example: `Restaurant mein order: order(item="Biryani", quantity=2, spice="medium"). Yahan item, quantity, spice parameters hain aur "Biryani", 2, "medium" arguments!`
+      },
+      {
+        heading: "Types of Arguments",
+        theory: `3 types hain: Positional (order se), Default (default value hota hai), Keyword (naam se pass karo). Default argument tab kaam aata hai jab value pass na karo.`,
+        code: `# 1. Positional Arguments
+def add(a, b):
+    return a + b
+print(add(5, 3))      # 8 (positional order)
+
+# 2. Default Arguments
+def greet(name, msg="Namaste!"):   # msg ka default value hai
+    print(f"{name}, {msg}")
+
+greet("Rahul")                     # Rahul, Namaste! (default use hua)
+greet("Priya", "Jai Hind!")        # Priya, Jai Hind! (custom value)
+
+# 3. Keyword Arguments (order matter nahi karta)
+def profile(name, age, city):
+    print(f"{name}, {age}, {city}")
+
+profile(age=25, city="Delhi", name="Rohit")  # Order alag, naam se pass
+# Output: Rohit, 25, Delhi (sahi!)
+
+# Practical example: Calculator
+def calculator(a, b, operation="add"):
+    if operation == "add":
+        return a + b
+    elif operation == "sub":
+        return a - b
+    elif operation == "mul":
+        return a * b
+    elif operation == "div":
+        return a / b if b != 0 else "Error: Zero division!"
+
+print(calculator(10, 5))           # 15 (default add)
+print(calculator(10, 5, "mul"))    # 50
+print(calculator(10, 0, "div"))    # Error message`,
+        example: `Google Search function: search(query, language="en", results=10). Language aur results ke default values hain. Sirf query dena zaroori hai!`
+      }
+    ]
+  },
+  {
+    id: 9,
+    title: "11-15 - Data Structures",
+    emoji: "🗂️",
+    color: "#98FB98",
+    content: [
+      {
+        heading: "List - Ordered Collection",
+        theory: `List Python ka sabse popular data structure hai. Yeh Mutable (change ho sakti hai), Ordered (sequence maintain hoti hai), Duplicates allow karti hai, aur Heterogeneous (alag alag types store kar sakta hai). Square brackets [] use karte hain.`,
+        code: `# List banana
+fruits = ["apple", "banana", "mango", "banana"]  # Duplicates allowed
+numbers = [1, 2, 3, 4, 5]
+mixed = [1, "hello", 3.14, True, None]            # Heterogeneous
+empty = []
+
+# Indexing (0 se shuru)
+print(fruits[0])     # apple
+print(fruits[-1])    # banana (last)
+print(fruits[1:3])   # ['banana', 'mango'] (slicing)
+
+# Mutability - Change kar sakte hain!
+fruits[0] = "orange"
+print(fruits)        # ['orange', 'banana', 'mango', 'banana']
+
+# List Methods (bahut important!)
+fruits.append("grape")       # End mein add
+fruits.insert(1, "kiwi")     # Index pe add
+fruits.remove("banana")      # Pehla 'banana' remove
+popped = fruits.pop()        # Last element remove aur return
+fruits.sort()                # Sort karo
+fruits.reverse()             # Reverse karo
+print(len(fruits))           # Length
+print(fruits.count("mango")) # Count occurrences
+print(fruits.index("mango")) # Index find karo
+
+# Loop karke traverse
+for fruit in fruits:
+    print(fruit)`,
+        example: `Shopping cart = [] (empty list). cart.append("Shoes"). cart.append("T-Shirt"). cart.remove("Shoes"). Yahi List hai!`
+      },
+      {
+        heading: "List Practice Questions",
+        theory: `Book ke list questions solve karte hain — yeh logic building mein help karte hain.`,
+        code: `# Q1: Positive aur Negative elements
+nums = [3, -1, 4, -1, 5, -9, 2, -6]
+positives = []
+negatives = []
+for n in nums:
+    if n > 0:
+        positives.append(n)
+    else:
+        negatives.append(n)
+print("Positive:", positives)
+print("Negative:", negatives)
+
+# Q2: Mean (average)
+marks = [85, 90, 78, 92, 88]
+mean = sum(marks) / len(marks)
+print(f"Mean: {mean:.2f}")   # 86.60
+
+# Q3: Greatest element aur uska index
+nums = [34, 67, 12, 89, 45]
+max_val = nums[0]
+max_idx = 0
+for i in range(len(nums)):
+    if nums[i] > max_val:
+        max_val = nums[i]
+        max_idx = i
+print(f"Greatest: {max_val} at index {max_idx}")
+
+# Q4: Second Greatest
+nums.sort(reverse=True)   # Descending sort
+print(f"Second Greatest: {nums[1]}")
+
+# Q5: Sorted check
+arr = [1, 2, 3, 4, 5]
+is_sorted = True
+for i in range(len(arr)-1):
+    if arr[i] > arr[i+1]:
+        is_sorted = False
+        break
+print("Sorted!" if is_sorted else "Not Sorted!")`,
+        example: `Leaderboard system: scores = [100, 250, 180, 300]. max(scores) → 300 (1st place). sorted(scores, reverse=True)[1] → 250 (2nd place)!`
+      },
+      {
+        heading: "Tuple - Immutable List",
+        theory: `Tuple bilkul List jaisi hai lekin ek fark: Immutable — ek baar ban gayi toh change nahi ho sakti. Parentheses () use karte hain. Sirf 2 methods hain: count() aur index().`,
+        code: `# Tuple banana
+coordinates = (10, 20)      # GPS coordinates
+colors = ("red", "green", "blue")
+single = (42,)               # Ek element wali tuple (comma zaroori!)
+empty = ()
+
+# Indexing aur Slicing (List jaisa)
+print(colors[0])        # red
+print(colors[-1])       # blue
+print(colors[1:3])      # ('green', 'blue')
+
+# Immutability - Change NAHI kar sakte
+# colors[0] = "yellow"  # TypeError!
+
+# Tuple Methods
+t = (1, 2, 3, 2, 2, 4)
+print(t.count(2))       # 3 (2 kitni baar aaya)
+print(t.index(3))       # 2 (3 kahan hai)
+
+# Tuple unpacking (bahut useful!)
+x, y = (10, 20)
+print(x, y)              # 10 20
+
+a, b, c = coordinates = (5, 10, 15)
+print(a, b, c)           # 5 10 15
+
+# When to use Tuple?
+# - Fixed data: months = ("Jan","Feb",...,"Dec")
+# - Return multiple values from function
+# - Dictionary keys (list keys nahi ban sakti!)`,
+        example: `GPS mein location = (28.6139, 77.2090) — latitude aur longitude. Yeh change nahi honi chahiye, isliye Tuple use karo! Database ke records bhi tuples hote hain.`
+      },
+      {
+        heading: "Set - Unique Collection",
+        theory: `Set ek collection hai jisme koi duplicate nahi ho sakta. Yeh Unordered hai (indexing nahi), Mutable hai, aur Hashing use karta hai. Curly braces {} use karte hain. Math ke sets jaisa kaam karta hai!`,
+        code: `# Set banana
+fruits = {"apple", "banana", "mango", "apple"}  # Duplicate remove!
+print(fruits)   # {'apple', 'banana', 'mango'} (order alag ho sakta hai)
+
+# Empty set (yeh dict nahi set hai)
+empty = set()   # {} nahi likhte, woh dict hai
+
+# Set mein indexing NAHI hoti
+# print(fruits[0])  # TypeError!
+
+# Set Methods
+fruits.add("grape")       # Element add karo
+fruits.discard("banana")  # Remove (error nahi deta agar nahi mila)
+fruits.remove("mango")    # Remove (error deta hai agar nahi mila)
+print(len(fruits))
+
+# Set Operations (Math jaisa!)
+A = {1, 2, 3, 4, 5}
+B = {4, 5, 6, 7, 8}
+
+print(A | B)    # Union: {1,2,3,4,5,6,7,8} (A ∪ B)
+print(A & B)    # Intersection: {4,5} (A ∩ B)
+print(A - B)    # Difference: {1,2,3} (A mein hai, B mein nahi)
+print(A ^ B)    # Symmetric diff: {1,2,3,6,7,8}
+
+# Shortcuts
+print(A.union(B))
+print(A.intersection(B))
+print(A.difference(B))
+
+# Unique elements find karna
+data = [1, 2, 2, 3, 3, 3, 4]
+unique = set(data)
+print(unique)   # {1, 2, 3, 4}`,
+        example: `Instagram pe "Mutual Friends" feature: user1_friends ∩ user2_friends → Set Intersection! Duplicate friends automatically remove ho jaate hain.`
+      },
+      {
+        heading: "Dictionary - Key-Value Store",
+        theory: `Dictionary key-value pairs store karta hai. Jaise real dictionary mein word (key) → meaning (value). Keys unique hote hain (duplicates nahi). Python 3.7+ mein ordered hai. Curly braces {} use karta hai.`,
+        code: `# Dictionary banana
+student = {
+    "name": "Rahul",
+    "age": 20,
+    "marks": 85.5,
+    "city": "Delhi"
+}
+
+# Access karna
+print(student["name"])         # Rahul
+print(student.get("age"))      # 20 (safer method)
+print(student.get("phone", "N/A"))  # N/A (default if not found)
+
+# Add / Update
+student["email"] = "rahul@gmail.com"   # New key add
+student["age"] = 21                     # Existing update
+
+# Delete
+del student["city"]           # Key delete
+popped = student.pop("email") # Delete aur return
+
+# Dictionary traversal
+for key in student:           # Keys traverse
+    print(key, ":", student[key])
+
+for key, value in student.items():  # Key-Value traverse
+    print(f"{key} → {value}")
+
+# Dictionary Methods
+print(student.keys())         # dict_keys(['name', 'age', 'marks'])
+print(student.values())       # dict_values(['Rahul', 21, 85.5])
+print(student.items())        # Key-value pairs
+
+# Nested Dictionary
+college = {
+    "CS": {"students": 120, "fees": 80000},
+    "IT": {"students": 90, "fees": 75000}
+}
+print(college["CS"]["fees"])  # 80000`,
+        example: `Contact book: contacts = {"Rahul": "9876543210", "Priya": "9123456789"}. contacts["Rahul"] → "9876543210". Yahi Dictionary hai!`
+      },
+      {
+        heading: "Dictionary Practice",
+        theory: `Dictionary ke questions solve karte hain jo frequently interview mein aate hain.`,
+        code: `# Q1: Do dictionaries merge karo
+d1 = {"a": 1, "b": 2, "c": 3}
+d2 = {"d": 4, "e": 5}
+merged = {**d1, **d2}   # ** operator se unpack karke merge
+print(merged)            # {'a':1, 'b':2, 'c':3, 'd':4, 'e':5}
+
+# ya
+d1.update(d2)
+print(d1)
+
+# Q2: Sum of values
+scores = {"Math": 95, "Science": 88, "English": 76}
+total = sum(scores.values())
+print(f"Total: {total}")   # 259
+
+# Q3: Frequency counter (element kitni baar aaya)
+data = ["apple", "banana", "apple", "cherry", "banana", "apple"]
+freq = {}
+for item in data:
+    if item in freq:
+        freq[item] += 1
+    else:
+        freq[item] = 1
+print(freq)   # {'apple': 3, 'banana': 2, 'cherry': 1}
+
+# Q4: Common keys ki values add karo
+dict1 = {"a": 1, "b": 2, "c": 3}
+dict2 = {"b": 3, "c": 4, "d": 5}
+result = {}
+for key in set(dict1) | set(dict2):   # All keys
+    result[key] = dict1.get(key, 0) + dict2.get(key, 0)
+print(result)  # {'a':1, 'b':5, 'c':7, 'd':5}`,
+        example: `Word count feature: "the cat sat on the mat" → {"the":2, "cat":1, "sat":1, "on":1, "mat":1}. Dictionary se frequency count!`
+      }
+    ]
+  },
+  {
+    id: 10,
+    title: "16 - Exception Handling",
+    emoji: "🛡️",
+    color: "#DDA0DD",
+    content: [
+      {
+        heading: "Errors vs Exceptions",
+        theory: `Errors aur Exceptions alag hain. Errors woh hain jo run hone se pehle hi fail ho jaate hain (Syntax Error, Indentation Error) — inhe handle nahi kar sakte. Exceptions runtime pe aate hain (division by zero, file not found) — inhe try-except se handle kar sakte hain!`,
+        code: `# Syntax Error (handle nahi ho sakta)
+# if True   # SyntaxError: missing colon
+# print("hello"  # SyntaxError: missing parenthesis
+
+# Indentation Error
+# def func():
+# print("hello")  # IndentationError
+
+# Exceptions (handle ho sakte hain):
+
+# ZeroDivisionError
+# print(10/0)   # ZeroDivisionError
+
+# ValueError
+# int("hello")  # ValueError
+
+# IndexError
+# arr = [1,2,3]
+# print(arr[10])  # IndexError
+
+# TypeError
+# "hello" + 5   # TypeError
+
+# NameError
+# print(undefined_var)  # NameError
+
+# FileNotFoundError
+# open("xyz.txt")  # FileNotFoundError
+
+# KeyError
+# d = {"a": 1}
+# print(d["b"])   # KeyError`,
+        example: `App crash hona ek unhandled exception hai! Instagram app agar exception handle na kare toh open hone pe hi crash ho jaaye. Exception handling se app smooth rehta hai!`
+      },
+      {
+        heading: "try-except-else-finally",
+        theory: `Exception handling ke 5 keywords hain: try (risky code yahan), except (error aane pe yeh chalega), else (error nahi aaya toh yeh), finally (hamesha chalega, chahe error ho ya nahi), raise (khud error throw karo).`,
+        code: `# Basic try-except
+try:
+    num = int(input("Number do: "))
+    result = 100 / num
+    print(f"Result: {result}")
+except ZeroDivisionError:
+    print("Zero se divide nahi kar sakte!")
+except ValueError:
+    print("Please number hi do!")
+
+# Multiple exceptions
+try:
+    a = int(input("a: "))
+    b = int(input("b: "))
+    print(a / b)
+except ValueError as e:
+    print(f"ValueError: {e}")
+except ZeroDivisionError:
+    print("Division by zero!")
+except Exception as e:       # Koi bhi exception catch karo
+    print(f"Error: {e}")
+
+# else aur finally
+try:
+    x = int("123")
+    print("Conversion successful!")
+except ValueError:
+    print("Invalid number!")
+else:
+    print("No error! Extra kaam karo")   # Sirf tab chalega
+finally:
+    print("Yeh HAMESHA chalega!")        # Hamesha
+
+# raise - Khud exception throw karo
+def check_age(age):
+    if age < 0:
+        raise ValueError("Age negative nahi ho sakti!")
+    if age > 150:
+        raise ValueError("Itna koi jeeta nahi!")
+    return f"Valid age: {age}"
+
+try:
+    print(check_age(-5))
+except ValueError as e:
+    print(f"Error: {e}")`,
+        example: `Banking app: try → account se paise nikalo. except InsufficientFunds → "Balance nahi hai". finally → transaction log karo (hamesha). Yahi production code mein hota hai!`
+      }
+    ]
+  },
+  {
+    id: 11,
+    title: "17 - File Handling",
+    emoji: "📁",
+    color: "#F0E68C",
+    content: [
+      {
+        heading: "File Handling kya hai?",
+        theory: `File Handling matlab files ke saath kaam karna — Create karna, Read karna, Update karna, Delete karna (CRUD). Python mein open() function se file open karte hain. Alag alag modes hote hain: 'r' (read), 'w' (write - overwrite), 'a' (append), 'x' (create new).`,
+        code: `# File open karne ke modes:
+# 'r'  - Read only (file honi chahiye)
+# 'w'  - Write (overwrite karta hai, file nahi ho toh banata hai)
+# 'a'  - Append (end mein add karta hai)
+# 'x'  - Create new (agar exist kare toh error)
+# 'rb' - Binary read
+# 'wb' - Binary write
+
+# WRITE - File mein likhna
+with open("diary.txt", "w") as f:    # 'with' auto-close karta hai
+    f.write("Aaj ka din bahut acha raha!\n")
+    f.write("Python seekha aur achha laga!\n")
+    f.writelines(["Line 3\n", "Line 4\n"])
+
+print("File likh di!")
+
+# READ - File padhna
+with open("diary.txt", "r") as f:
+    content = f.read()          # Poori file ek saath
+    print(content)
+
+with open("diary.txt", "r") as f:
+    lines = f.readlines()       # List of lines
+    for line in lines:
+        print(line.strip())     # .strip() newline remove karta hai
+
+with open("diary.txt", "r") as f:
+    for line in f:              # Line by line (memory efficient)
+        print(line.strip())`,
+        example: `WhatsApp chat export = file handling! Messages ek .txt file mein hote hain. Python se us file ko read karke analysis kar sakte ho — message count, most used word, etc.`
+      },
+      {
+        heading: "File Operations - CRUD",
+        theory: `Complete CRUD operations aur exception handling ke saath file kaise handle karte hain yeh samajhte hain.`,
+        code: `import os
+
+# CREATE - Naya file
+with open("notes.txt", "x") as f:    # 'x' = new file create
+    f.write("Meri notes!\n")
+
+# READ
+def read_file(filename):
+    try:
+        with open(filename, "r") as f:
+            return f.read()
+    except FileNotFoundError:
+        return "File nahi mili!"
+
+# UPDATE (Append karna)
+with open("notes.txt", "a") as f:
+    f.write("Naya note add kiya!\n")
+
+# DELETE
+if os.path.exists("notes.txt"):
+    os.remove("notes.txt")
+    print("File delete ho gayi!")
+else:
+    print("File hai hi nahi!")
+
+# PRACTICAL PROJECT: Student diary
+def save_entry(entry):
+    with open("diary.txt", "a") as f:
+        from datetime import datetime
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+        f.write(f"[{timestamp}] {entry}\n")
+
+def read_all():
+    try:
+        with open("diary.txt", "r") as f:
+            return f.readlines()
+    except FileNotFoundError:
+        return []
+
+# Use karo:
+save_entry("Aaj Python seekha!")
+save_entry("Bahut maza aaya!")
+entries = read_all()
+for e in entries:
+    print(e.strip())`,
+        example: `Notes app: Har note save karna = file append. Sab notes padhna = file read. Note delete karna = file modify. Yahi basic file handling hai!`
+      }
+    ]
+  },
+  {
+    id: 12,
+    title: "18-27 - OOPS (Object Oriented Programming)",
+    emoji: "🏗️",
+    color: "#87CEEB",
+    content: [
+      {
+        heading: "OOPS kya hai? Kyun use karte hain?",
+        theory: `Pehle hum imperative approach use karte the (seedha code), phir functional approach (functions), aur ab Object Oriented approach (classes aur objects). OOPS real world chezon ko code mein represent karta hai. Car, Student, Bank Account — sab objects ban sakte hain!`,
+        code: `# Imperative Approach (purana tarika)
+a = 5
+b = 3
+result = a + b  # Ek addition ke liye theek hai, but 100 ke liye?
+
+# Functional Approach
+def add(a, b):
+    return a + b
+# Better! Reuse ho sakta hai
+
+# Object Oriented Approach
+class Calculator:
+    def add(self, a, b):
+        return a + b
+    
+    def subtract(self, a, b):
+        return a - b
+    
+    def multiply(self, a, b):
+        return a * b
+
+calc = Calculator()   # Object banana
+print(calc.add(5, 3))       # 8
+print(calc.subtract(10, 4)) # 6
+print(calc.multiply(3, 7))  # 21
+
+# OOPS ke 4 pillars:
+# 1. Encapsulation - Data hide karna
+# 2. Inheritance - Property inherit karna
+# 3. Polymorphism - Same method, alag behavior
+# 4. Abstraction - Sirf zaroori details dikhana`,
+        example: `YouTube ka Video object sochho: attributes (title, views, likes), methods (play(), pause(), like()). Har video ek object hai "Video" class ka!`
+      },
+      {
+        heading: "Classes aur Objects",
+        theory: `Class ek blueprint/template hai. Object us blueprint se bana actual item hai. Jaise: "Ghar ka naksha" = Class, "Actual ghar" = Object. Class mein Attributes (variables) aur Methods (functions) hote hain.`,
+        code: `# Class banana
+class Student:
+    # Class Attribute (sab objects ke liye same)
+    school = "Sheryians Coding School"
+    
+    # Instance Attributes aur Constructor
+    def __init__(self, name, age, marks):   # Constructor
+        self.name = name     # Instance attribute
+        self.age = age
+        self.marks = marks
+    
+    # Instance Method
+    def introduce(self):
+        print(f"Main {self.name} hoon, {self.age} saal ka!")
+    
+    def grade(self):
+        if self.marks >= 90:
+            return "A+"
+        elif self.marks >= 80:
+            return "A"
+        else:
+            return "B"
+    
+    def __str__(self):   # Print karne pe kya dikhaye
+        return f"Student: {self.name}, Grade: {self.grade()}"
+
+# Objects banana
+s1 = Student("Rahul", 20, 92)
+s2 = Student("Priya", 19, 85)
+
+# Attributes access
+print(s1.name)         # Rahul
+print(s2.age)          # 19
+print(s1.school)       # Sheryians Coding School
+
+# Methods call karna
+s1.introduce()         # Main Rahul hoon, 20 saal ka!
+print(s2.grade())      # A
+
+# __str__ method (print karne pe)
+print(s1)              # Student: Rahul, Grade: A+
+print(s2)              # Student: Priya, Grade: A`,
+        example: `Instagram pe har User ek object hai: User(username, followers, posts). @rahul101 ek object hai, @priya202 doosra object — dono same User class se!`
+      },
+      {
+        heading: "Constructor aur self keyword",
+        theory: `Constructor (__init__) woh special method hai jo class se object banate waqt automatically call hota hai. self keyword current object ko refer karta hai — different objects ke alag alag data ke liye yeh zaroori hai.`,
+        code: `# Constructor example - Bag Factory (book example)
+class Bag:
+    def __init__(self, material, zips, pockets):
+        self.material = material    # self = is specific object
+        self.zips = zips
+        self.pockets = pockets
+        self.brand = None           # Baad mein set hoga
+    
+    def set_brand(self, brand):
+        self.brand = brand
+    
+    def describe(self):
+        print(f"Brand: {self.brand}")
+        print(f"Material: {self.material}")
+        print(f"Zips: {self.zips}, Pockets: {self.pockets}")
+
+# Different companies ke alag objects
+reebok_bag = Bag("Leather", 3, 5)
+reebok_bag.set_brand("Reebok")
+
+campus_bag = Bag("Canvas", 2, 4)
+campus_bag.set_brand("Campus")
+
+reebok_bag.describe()  # Reebok ka data
+campus_bag.describe()  # Campus ka data (alag!)
+
+# self ensure karta hai ki reebok_bag.material aur 
+# campus_bag.material alag boxes mein stored hain!`,
+        example: `Bag factory: Reebok ne leather, 3 zips, 5 pockets maanga → reebok_bag object. Campus ne canvas, 2 zips, 4 pockets → campus_bag. Dono alag hain because self alag locations refer karta hai!`
+      },
+      {
+        heading: "Types of Attributes aur Methods",
+        theory: `Attributes 2 types ke hote hain: Class attribute (sab ke liye same) aur Instance attribute (self. se, har object ka alag). Methods 3 types ke hote hain: Instance method, Class method (@classmethod), Static method (@staticmethod).`,
+        code: `class BankAccount:
+    bank_name = "Python Bank"    # Class attribute (sab ke liye)
+    total_accounts = 0           # Track karna
+    
+    def __init__(self, owner, balance):
+        self.owner = owner           # Instance attribute
+        self.balance = balance
+        BankAccount.total_accounts += 1  # Class attribute update
+    
+    # Instance Method (self use karta hai)
+    def deposit(self, amount):
+        self.balance += amount
+        print(f"₹{amount} deposit hua. Balance: ₹{self.balance}")
+    
+    def withdraw(self, amount):
+        if amount <= self.balance:
+            self.balance -= amount
+            print(f"₹{amount} withdraw hua!")
+        else:
+            print("Insufficient balance!")
+    
+    # Class Method (cls use karta hai, class ke liye)
+    @classmethod
+    def get_bank_name(cls):
+        return cls.bank_name
+    
+    @classmethod
+    def get_total_accounts(cls):
+        return f"Total accounts: {cls.total_accounts}"
+    
+    # Static Method (koi bhi access nahi karta)
+    @staticmethod
+    def interest_rate():
+        return "5.5% per annum"
+
+# Use karna
+acc1 = BankAccount("Rahul", 10000)
+acc2 = BankAccount("Priya", 25000)
+
+acc1.deposit(5000)           # Instance method
+acc1.withdraw(2000)          # Instance method
+
+print(BankAccount.get_bank_name())       # Class method
+print(BankAccount.get_total_accounts())  # Total: 2
+print(BankAccount.interest_rate())       # Static method`,
+        example: `Hospital system: Patient ka naam/age = instance attribute (har patient ka alag). Hospital ka naam = class attribute (sab ke liye same). Static method: calculate_bmi(weight, height) — kisi ke data se seedha related nahi!`
+      },
+      {
+        heading: "Inheritance",
+        theory: `Inheritance matlab ek class doosri class ki properties aur methods inherit (le) karte hain. Parent class (superclass) ki cheezein Child class (subclass) ko milti hain. Code reuse hota hai, organize rehta hai, maintain karna easy hota hai.`,
+        code: `# Parent Class
+class Animal:
+    def __init__(self, name, sound):
+        self.name = name
+        self.sound = sound
+    
+    def speak(self):
+        print(f"{self.name} says {self.sound}")
+    
+    def eat(self):
+        print(f"{self.name} is eating!")
+
+# Child Class (Single Inheritance)
+class Dog(Animal):    # Animal inherit kiya
+    def __init__(self, name, breed):
+        super().__init__(name, "Woof")  # Parent constructor call
+        self.breed = breed
+    
+    def fetch(self):   # New method in child
+        print(f"{self.name} fetches the ball!")
+
+class Cat(Animal):
+    def __init__(self, name, indoor):
+        super().__init__(name, "Meow")
+        self.indoor = indoor
+    
+    def purr(self):
+        print(f"{self.name} is purring! 😺")
+
+# Objects
+dog = Dog("Bruno", "Labrador")
+cat = Cat("Whiskers", True)
+
+dog.speak()    # Bruno says Woof (inherited!)
+dog.eat()      # Bruno is eating! (inherited!)
+dog.fetch()    # Bruno fetches the ball! (own method)
+
+cat.speak()    # Whiskers says Meow
+cat.purr()     # Whiskers is purring!
+
+# Multiple Inheritance
+class FlyingAnimal:
+    def fly(self):
+        print("Main ud raha hoon! 🦅")
+
+class Duck(Animal, FlyingAnimal):  # Do parents!
+    def __init__(self, name):
+        super().__init__(name, "Quack")
+
+duck = Duck("Donald")
+duck.speak()   # Donald says Quack
+duck.fly()     # Main ud raha hoon!
+duck.eat()     # Donald is eating!`,
+        example: `Company hierarchy: Employee → Manager → CEO. Manager ko Employee ke sab attributes milte hain (salary, name) plus extra (team_size). CEO ko sab milte hain plus company_equity!`
+      },
+      {
+        heading: "Multilevel Inheritance",
+        theory: `Multilevel mein chain hoti hai: Grandparent → Parent → Child. Har class pichli class ki properties inherit karti hai. Aur super() parent class ko target karta hai.`,
+        code: `# Multilevel Inheritance
+class Vehicle:
+    def __init__(self, brand):
+        self.brand = brand
+    
+    def start(self):
+        print(f"{self.brand} start ho gaya!")
+    
+    def stop(self):
+        print(f"{self.brand} ruk gaya!")
+
+class Car(Vehicle):   # Vehicle inherit kiya
+    def __init__(self, brand, doors):
+        super().__init__(brand)
+        self.doors = doors
+    
+    def honk(self):
+        print(f"{self.brand}: Beep Beep! 🚗")
+
+class ElectricCar(Car):   # Car inherit kiya (jo Vehicle se inherit karta hai)
+    def __init__(self, brand, doors, battery_range):
+        super().__init__(brand, doors)
+        self.battery_range = battery_range
+    
+    def charge(self):
+        print(f"{self.brand} charging... ⚡")
+    
+    def check_range(self):
+        print(f"Range: {self.battery_range} km")
+
+# ElectricCar ke paas sab kuch hai!
+tesla = ElectricCar("Tesla", 4, 500)
+tesla.start()         # Vehicle se inherited
+tesla.honk()          # Car se inherited
+tesla.charge()        # Apna method
+tesla.check_range()   # Apna method
+tesla.stop()          # Vehicle se inherited
+
+# MRO (Method Resolution Order) check karo
+print(ElectricCar.__mro__)`,
+        example: `Smartphone: Device (power, screen) → Phone (call, SMS) → Smartphone (apps, internet, camera). Smartphone ko sab features milte hain chain se!`
+      },
+      {
+        heading: "Polymorphism",
+        theory: `Polymorphism = "Bahut roopein" (Many Forms). Ek hi method name alag alag objects mein alag kaam karta hai. Python mein 2 ways hain: Method Overriding (child class parent ka method override kare) aur Duck Typing (object ka type matter nahi, behavior matter karta hai).`,
+        code: `# Method Overriding
+class Shape:
+    def area(self):
+        return "Area calculate nahi ho sakta base class se!"
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+    
+    def area(self):   # Override kiya!
+        import math
+        return math.pi * self.radius ** 2
+
+class Rectangle(Shape):
+    def __init__(self, w, h):
+        self.w = w
+        self.h = h
+    
+    def area(self):   # Override kiya!
+        return self.w * self.h
+
+class Triangle(Shape):
+    def __init__(self, b, h):
+        self.b = b
+        self.h = h
+    
+    def area(self):   # Override kiya!
+        return 0.5 * self.b * self.h
+
+# Same method name, alag behavior!
+shapes = [Circle(5), Rectangle(4, 6), Triangle(3, 8)]
+for shape in shapes:
+    print(f"{shape.__class__.__name__}: {shape.area():.2f}")
+
+# Duck Typing (book se)
+class Duck:
+    def talk(self):
+        print("Quack Quack!")
+
+class Human:
+    def talk(self):
+        print("Hello Hello!")
+
+class Robot:
+    def talk(self):
+        print("Beep Boop!")
+
+def make_speak(entity):   # Sirf .talk() chahiye, type matter nahi!
+    entity.talk()
+
+make_speak(Duck())    # Quack Quack!
+make_speak(Human())   # Hello Hello!
+make_speak(Robot())   # Beep Boop!`,
+        example: `Payment gateway: PayByCash.pay(), PayByCard.pay(), PayByUPI.pay() — teeno ka method naam same "pay()" lekin implementation alag. Polymorphism!`
+      },
+      {
+        heading: "Encapsulation aur Access Modifiers",
+        theory: `Encapsulation matlab data aur code ek saath rakhna aur sensitive data ko hide karna. Python mein 3 access levels hain: Public (koi bhi access kare), Protected (_single_underscore, convention only), Private (__double_underscore, name mangling).`,
+        code: `class BankAccount:
+    def __init__(self, owner, balance, pin):
+        self.owner = owner           # Public
+        self._account_type = "Savings"  # Protected (convention)
+        self.__balance = balance     # Private (double underscore)
+        self.__pin = pin             # Private
+    
+    # Public method - balance check (pin ke through)
+    def check_balance(self, pin):
+        if pin == self.__pin:
+            return f"Balance: ₹{self.__balance}"
+        else:
+            return "Wrong PIN!"
+    
+    # Getter method (private data access karne ke liye)
+    def get_balance(self):
+        return self.__balance
+    
+    # Setter method (controlled modification)
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print(f"Deposited ₹{amount}")
+        else:
+            print("Invalid amount!")
+
+acc = BankAccount("Rahul", 10000, 1234)
+
+# Public access
+print(acc.owner)           # Rahul ✅
+
+# Protected access (allowed but convention says don't)
+print(acc._account_type)   # Savings ⚠️
+
+# Private access attempt
+# print(acc.__balance)     # AttributeError! ❌
+
+# Correct way
+print(acc.check_balance(1234))  # Balance: ₹10000 ✅
+print(acc.check_balance(9999))  # Wrong PIN! ✅
+
+acc.deposit(5000)
+print(acc.get_balance())         # 15000`,
+        example: `Real banking: Balance ka data private hota hai. Tum seedha change nahi kar sakte. Sirf bank ke approved methods (deposit, withdraw) se change hota hai. Yahi Encapsulation ka fayda hai!`
+      },
+      {
+        heading: "Abstraction",
+        theory: `Abstraction = sirf zaroori cheezein dikhao, complexity hide karo. Jaise car chalate waqt engine ke internals nahi jaante, sirf steering aur accelerator jaante hain. Python mein abc (Abstract Base Class) module se achieve karte hain.`,
+        code: `from abc import ABC, abstractmethod
+
+# Abstract Class
+class PaymentGateway(ABC):   # ABC se inherit kiya
+    
+    @abstractmethod
+    def pay(self, amount):   # Abstract method - implement karna zaroori
+        pass
+    
+    @abstractmethod
+    def refund(self, amount):
+        pass
+    
+    def receipt(self, amount):   # Concrete method (already implemented)
+        print(f"Receipt: ₹{amount} payment successful!")
+
+# Concrete Classes (implementation provide karte hain)
+class UPIPayment(PaymentGateway):
+    def pay(self, amount):
+        print(f"UPI se ₹{amount} pay kiya! 📱")
+    
+    def refund(self, amount):
+        print(f"UPI refund: ₹{amount} wapas aayega!")
+
+class CardPayment(PaymentGateway):
+    def pay(self, amount):
+        print(f"Card se ₹{amount} pay kiya! 💳")
+    
+    def refund(self, amount):
+        print(f"Card refund: ₹{amount} wapas!")
+
+# Abstract class ka object nahi ban sakta
+# p = PaymentGateway()  # TypeError!
+
+upi = UPIPayment()
+upi.pay(500)         # UPI se ₹500 pay kiya!
+upi.receipt(500)     # Receipt: ₹500 payment successful! (inherited)
+upi.refund(500)
+
+card = CardPayment()
+card.pay(1000)`,
+        example: `Netflix: VideoPlayer abstract class (abstract methods: play, pause, stop). HLSPlayer, MP4Player, DASHPlayer implement karte hain apne tarike se. Users ko bas buttons chahiye — implementation details nahi!`
+      },
+      {
+        heading: "Dunder (Magic) Methods",
+        theory: `Dunder methods special methods hote hain jo __double_underscores__ se start aur end hote hain. Yeh automatically call hote hain certain operations pe. Objects ko built-in types jaisa behave karaate hain!`,
+        code: `class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    def __str__(self):          # print() ke liye
+        return f"Vector({self.x}, {self.y})"
+    
+    def __repr__(self):         # Developer representation
+        return f"Vector(x={self.x}, y={self.y})"
+    
+    def __add__(self, other):   # + operator
+        return Vector(self.x + other.x, self.y + other.y)
+    
+    def __sub__(self, other):   # - operator
+        return Vector(self.x - other.x, self.y - other.y)
+    
+    def __mul__(self, scalar):  # * operator
+        return Vector(self.x * scalar, self.y * scalar)
+    
+    def __len__(self):          # len() ke liye
+        return int((self.x**2 + self.y**2)**0.5)
+    
+    def __eq__(self, other):    # == operator
+        return self.x == other.x and self.y == other.y
+    
+    def __lt__(self, other):    # < operator
+        return len(self) < len(other)
+
+v1 = Vector(3, 4)
+v2 = Vector(1, 2)
+
+print(v1)           # Vector(3, 4)  [__str__]
+print(v1 + v2)      # Vector(4, 6)  [__add__]
+print(v1 - v2)      # Vector(2, 2)  [__sub__]
+print(v1 * 3)       # Vector(9, 12) [__mul__]
+print(len(v1))      # 5 (3-4-5 triangle) [__len__]
+print(v1 == v2)     # False [__eq__]
+
+# Common Dunder Methods:
+# __init__   : Constructor
+# __str__    : String representation (user ke liye)
+# __repr__   : Representation (developer ke liye)
+# __len__    : len() function
+# __add__    : + operator
+# __sub__    : - operator
+# __mul__    : * operator
+# __eq__     : == operator
+# __lt__     : < operator
+# __gt__     : > operator
+# __contains__: in operator`,
+        example: `Python list mein [1,2] + [3,4] = [1,2,3,4] kaise kaam karta hai? List class ke __add__ method se! Tum bhi apni class mein + operator customize kar sakte ho!`
+      }
+    ]
+  },
+  {
+    id: 13,
+    title: "28 - Advanced Concepts",
+    emoji: "🚀",
+    color: "#FF7F7F",
+    content: [
+      {
+        heading: "Decorators",
+        theory: `Decorator ek function hai jo doosre function ko modify karta hai bina uska code change kiye. Jaise cake pe icing lagana — cake (function) same rehta hai, sirf icing (decorator) add hoti hai. @ symbol se use karte hain.`,
+        code: `# Basic Decorator
+def my_decorator(func):
+    def wrapper():
+        print("Function se pehle! 🔴")
+        func()
+        print("Function ke baad! 🟢")
+    return wrapper
+
+# Manual way
+def hello():
+    print("Hello! 👋")
+
+decorated = my_decorator(hello)
+decorated()
+
+# @ syntax (cleaner way)
+@my_decorator
+def goodbye():
+    print("Goodbye! 👋")
+
+goodbye()
+# Output:
+# Function se pehle!
+# Goodbye!
+# Function ke baad!
+
+# Arguments ke saath decorator
+def log_decorator(func):
+    def wrapper(*args, **kwargs):
+        print(f"Calling: {func.__name__}")
+        result = func(*args, **kwargs)
+        print(f"Returned: {result}")
+        return result
+    return wrapper
+
+@log_decorator
+def add(a, b):
+    return a + b
+
+add(5, 3)
+# Calling: add
+# Returned: 8
+
+# Timer decorator (practical)
+import time
+
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(f"{func.__name__} took {end-start:.4f} seconds")
+        return result
+    return wrapper
+
+@timer
+def slow_function():
+    time.sleep(0.1)
+    return "Done!"
+
+slow_function()`,
+        example: `Instagram pe @login_required decorator ensure karta hai ki sirf logged-in users hi post kar sakein. Flask/Django web frameworks mein yeh bahut use hota hai!`
+      },
+      {
+        heading: "*args aur **kwargs",
+        theory: `*args se function mein unlimited positional arguments pass kar sakte hain (tuple mein convert hota hai). **kwargs se unlimited keyword arguments pass kar sakte hain (dictionary mein convert hota hai). Flexible functions banane ke kaam aate hain!`,
+        code: `# *args - Multiple positional arguments
+def total(*args):
+    print(f"Type: {type(args)}")   # <class 'tuple'>
+    return sum(args)
+
+print(total(1, 2, 3))          # 6
+print(total(10, 20, 30, 40))   # 100
+print(total(5))                # 5
+
+# **kwargs - Multiple keyword arguments  
+def profile(**kwargs):
+    print(f"Type: {type(kwargs)}")  # <class 'dict'>
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+profile(name="Rahul", age=20, city="Delhi")
+# name: Rahul
+# age: 20
+# city: Delhi
+
+# Dono saath
+def full_info(*args, **kwargs):
+    print("Positional:", args)
+    print("Keyword:", kwargs)
+
+full_info(1, 2, 3, name="Priya", age=18)
+
+# Practical: Flexible calculator
+def calculate(operation, *numbers):
+    if operation == "sum":
+        return sum(numbers)
+    elif operation == "product":
+        result = 1
+        for n in numbers:
+            result *= n
+        return result
+
+print(calculate("sum", 1, 2, 3, 4, 5))        # 15
+print(calculate("product", 2, 3, 4))           # 24`,
+        example: `print() khud *args use karta hai isliye tum print(1, 2, 3) bhi kar sakte ho aur print("Hello") bhi! Unlimited arguments!`
+      },
+      {
+        heading: "Comprehensions (List, Dict, Set)",
+        theory: `Comprehensions ek shorthand hai loops aur conditions ke saath collections banane ka. Code concise aur readable hota hai. List, Dictionary aur Set teenoN ke liye alag alag syntax hai.`,
+        code: `# List Comprehension
+# Normal way:
+squares = []
+for i in range(1, 6):
+    squares.append(i**2)
+
+# Comprehension way:
+squares = [i**2 for i in range(1, 6)]
+print(squares)    # [1, 4, 9, 16, 25]
+
+# With condition
+evens = [i for i in range(20) if i % 2 == 0]
+print(evens)      # [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+# Nested (2D list)
+matrix = [[i*j for j in range(1, 4)] for i in range(1, 4)]
+print(matrix)     # [[1,2,3], [2,4,6], [3,6,9]]
+
+# Dictionary Comprehension
+words = ["apple", "banana", "cherry"]
+word_len = {word: len(word) for word in words}
+print(word_len)   # {'apple': 5, 'banana': 6, 'cherry': 6}
+
+# Squares dict
+sq_dict = {n: n**2 for n in range(1, 6)}
+print(sq_dict)    # {1:1, 2:4, 3:9, 4:16, 5:25}
+
+# Set Comprehension (unique values)
+nums = [1, 2, 2, 3, 3, 4]
+unique_sq = {n**2 for n in nums}
+print(unique_sq)  # {1, 4, 9, 16} (unique)
+
+# Practical: Filter valid emails
+emails = ["a@b.com", "invalid", "x@y.com", "noat"]
+valid = [e for e in emails if "@" in e and "." in e]
+print(valid)   # ['a@b.com', 'x@y.com']`,
+        example: `Data processing mein: 1000 student records se sirf pass students ki list ek line mein: [s for s in students if s["marks"] >= 40]. Comprehension FTW!`
+      },
+      {
+        heading: "Lambda Functions",
+        theory: `Lambda ek anonymous (bina naam ka) function hai jo ek single expression evaluate karta hai. Short, one-time use ke functions ke liye perfect. Syntax: lambda arguments: expression`,
+        code: `# Normal function
+def square(x):
+    return x**2
+
+# Lambda equivalent
+square = lambda x: x**2
+
+print(square(5))    # 25
+
+# Multiple arguments
+multiply = lambda a, b: a * b
+print(multiply(3, 4))   # 12
+
+# Conditional in lambda
+check_age = lambda age: "Adult" if age >= 18 else "Minor"
+print(check_age(20))    # Adult
+print(check_age(15))    # Minor
+
+# Lambda with sort (key parameter)
+students = [
+    {"name": "Rahul", "marks": 85},
+    {"name": "Priya", "marks": 92},
+    {"name": "Amit", "marks": 78}
+]
+
+# Marks ke basis pe sort karo
+students.sort(key=lambda s: s["marks"], reverse=True)
+for s in students:
+    print(s["name"], s["marks"])
+# Priya 92, Rahul 85, Amit 78
+
+# Lambda with map, filter
+numbers = [1, 2, 3, 4, 5]
+doubled = list(map(lambda x: x*2, numbers))
+print(doubled)    # [2, 4, 6, 8, 10]`,
+        example: `Sorting leaderboard by score: players.sort(key=lambda p: p.score, reverse=True). Lambda ek line mein sorting logic define karta hai!`
+      },
+      {
+        heading: "Map, Filter aur Zip",
+        theory: `Map: function ko list ke har element pe apply karo. Filter: condition ke basis pe elements rakhna ya hatana. Zip: do lists ko saath combine karna. Teeno functional programming tools hain!`,
+        code: `# MAP - Har element pe function apply karo
+numbers = [1, 2, 3, 4, 5]
+
+# Normal way
+squared = []
+for n in numbers:
+    squared.append(n**2)
+
+# Map way
+squared = list(map(lambda x: x**2, numbers))
+print(squared)    # [1, 4, 9, 16, 25]
+
+# Strings ke saath map
+names = ["rahul", "priya", "amit"]
+capitalized = list(map(str.capitalize, names))
+print(capitalized)  # ['Rahul', 'Priya', 'Amit']
+
+# FILTER - Condition se filter karo
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+evens = list(filter(lambda x: x % 2 == 0, nums))
+print(evens)    # [2, 4, 6, 8, 10]
+
+# Empty strings filter out karo
+words = ["hello", "", "world", "", "python"]
+non_empty = list(filter(None, words))   # None se falsy remove
+print(non_empty)  # ['hello', 'world', 'python']
+
+# ZIP - Do lists combine karo
+names = ["Rahul", "Priya", "Amit"]
+marks = [85, 92, 78]
+
+for name, mark in zip(names, marks):
+    print(f"{name}: {mark}")
+
+# Dictionary banana zip se
+student_dict = dict(zip(names, marks))
+print(student_dict)  # {'Rahul': 85, 'Priya': 92, 'Amit': 78}`,
+        example: `Data science mein: filter(lambda x: x > threshold, readings) se sensor readings filter karte hain. map(normalize, data) se data normalize karte hain!`
+      },
+      {
+        heading: "Modules aur Packages",
+        theory: `Module ek Python file (.py) hai jisme functions, classes, variables hote hain. Package ek folder hai jisme multiple modules hote hain. Python ke built-in modules hain: math, random, datetime, os. Third-party: numpy, pandas, matplotlib — yeh pip se install karte hain.`,
+        code: `# Built-in Modules use karna
+import math
+print(math.pi)          # 3.14159...
+print(math.sqrt(16))    # 4.0
+print(math.floor(3.7))  # 3
+print(math.ceil(3.2))   # 4
+
+import random
+print(random.randint(1, 100))     # Random 1-100 number
+print(random.choice(["a","b","c"]))  # Random choice
+my_list = [1,2,3,4,5]
+random.shuffle(my_list)
+print(my_list)
+
+import datetime
+now = datetime.datetime.now()
+print(now.year, now.month, now.day)
+print(now.strftime("%d-%m-%Y %H:%M"))
+
+import os
+print(os.getcwd())          # Current directory
+print(os.listdir("."))      # Files list
+
+# Apna module banana: calculator.py
+# --- calculator.py ---
+# def add(a, b): return a + b
+# def sub(a, b): return a - b
+
+# Doosri file mein import karo:
+# import calculator
+# print(calculator.add(5, 3))
+
+# ya specific function import:
+from math import sqrt, pi
+print(sqrt(25))   # 5.0
+
+# Alias se import
+import numpy as np    # pip install numpy
+# import pandas as pd   # pip install pandas
+
+# Third party install:
+# Terminal mein: pip install numpy pandas matplotlib`,
+        example: `News app banate waqt: import requests (internet se data fetch), import json (JSON parse), import datetime (date format). Sab modules ek saath use karte hain!`
+      }
+    ]
+  }
+];
+
+export default function PythonHinglishBook() {
+  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [expandedSection, setExpandedSection] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [copiedCode, setCopiedCode] = useState(null);
+
+  const filteredTopics = topics.filter(t =>
+    t.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    t.content.some(c => c.heading.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  const copyCode = (code, id) => {
+    navigator.clipboard.writeText(code).then(() => {
+      setCopiedCode(id);
+      setTimeout(() => setCopiedCode(null), 2000);
+    });
+  };
+
+  return (
+    <div style={{
+      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+      background: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)",
+      minHeight: "100vh",
+      color: "#fff",
+      padding: "0"
+    }}>
+      {/* Header */}
+      <div style={{
+        background: "linear-gradient(90deg, #ff6b35, #f7c59f, #efefd0, #004e89)",
+        padding: "3px",
+        position: "sticky",
+        top: 0,
+        zIndex: 100
+      }}>
+        <div style={{
+          background: "linear-gradient(135deg, #0f0c29ee, #302b63ee)",
+          padding: "20px 30px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "15px"
+        }}>
+          <div>
+            <h1 style={{
+              margin: 0,
+              fontSize: "clamp(20px, 4vw, 32px)",
+              background: "linear-gradient(90deg, #ff6b35, #ffd93d, #6bcb77, #4d96ff)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              fontWeight: "900",
+              letterSpacing: "-1px"
+            }}>
+              🐍 Python Hinglish Handbook
+            </h1>
+            <p style={{ margin: "5px 0 0", color: "#aaa", fontSize: "14px" }}>
+              Sheryians Coding School • Slide 1-70 • Har concept code ke saath
+            </p>
+          </div>
+          <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+            <input
+              type="text"
+              placeholder="🔍 Topic search karo..."
+              value={searchTerm}
+              onChange={e => { setSearchTerm(e.target.value); setSelectedTopic(null); }}
+              style={{
+                padding: "10px 16px",
+                borderRadius: "25px",
+                border: "2px solid rgba(255,255,255,0.2)",
+                background: "rgba(255,255,255,0.1)",
+                color: "#fff",
+                fontSize: "14px",
+                width: "200px",
+                outline: "none",
+                backdropFilter: "blur(10px)"
+              }}
+            />
+            {selectedTopic && (
+              <button
+                onClick={() => setSelectedTopic(null)}
+                style={{
+                  padding: "10px 16px",
+                  borderRadius: "25px",
+                  border: "none",
+                  background: "rgba(255,107,53,0.8)",
+                  color: "#fff",
+                  cursor: "pointer",
+                  fontSize: "14px",
+                  fontWeight: "bold"
+                }}
+              >
+                ← Back
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "30px 20px" }}>
+        {!selectedTopic ? (
+          <>
+            <div style={{ textAlign: "center", marginBottom: "40px" }}>
+              <div style={{
+                display: "inline-block",
+                background: "rgba(255,255,255,0.05)",
+                borderRadius: "16px",
+                padding: "20px 40px",
+                border: "1px solid rgba(255,255,255,0.1)"
+              }}>
+                <p style={{ margin: 0, fontSize: "16px", color: "#ddd", lineHeight: 1.8 }}>
+                  👋 Yaar! Neeche se koi bhi topic click karo aur padhna shuru karo.<br />
+                  Har topic mein <strong style={{ color: "#ffd93d" }}>Theory in Hinglish</strong> + <strong style={{ color: "#6bcb77" }}>Code Examples</strong> + <strong style={{ color: "#4d96ff" }}>Real-world Examples</strong> hain!
+                </p>
+              </div>
+            </div>
+
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+              gap: "20px"
+            }}>
+              {filteredTopics.map((topic) => (
+                <div
+                  key={topic.id}
+                  onClick={() => { setSelectedTopic(topic); setExpandedSection(null); setSearchTerm(""); }}
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    borderRadius: "16px",
+                    padding: "24px",
+                    cursor: "pointer",
+                    border: `2px solid transparent`,
+                    transition: "all 0.3s ease",
+                    backdropFilter: "blur(10px)",
+                    position: "relative",
+                    overflow: "hidden"
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = "translateY(-5px)";
+                    e.currentTarget.style.border = `2px solid ${topic.color}`;
+                    e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                    e.currentTarget.style.boxShadow = `0 20px 40px ${topic.color}33`;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.border = "2px solid transparent";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
+                >
+                  <div style={{
+                    position: "absolute",
+                    top: "-20px",
+                    right: "-20px",
+                    fontSize: "80px",
+                    opacity: 0.1
+                  }}>{topic.emoji}</div>
+                  <div style={{ fontSize: "36px", marginBottom: "12px" }}>{topic.emoji}</div>
+                  <h3 style={{
+                    margin: "0 0 8px",
+                    fontSize: "16px",
+                    fontWeight: "700",
+                    color: topic.color
+                  }}>{topic.title}</h3>
+                  <p style={{ margin: 0, color: "#999", fontSize: "13px" }}>
+                    {topic.content.length} sections
+                  </p>
+                  <div style={{ marginTop: "15px" }}>
+                    {topic.content.slice(0, 2).map((c, i) => (
+                      <div key={i} style={{
+                        fontSize: "12px",
+                        color: "#ccc",
+                        padding: "4px 0",
+                        borderTop: "1px solid rgba(255,255,255,0.05)"
+                      }}>
+                        • {c.heading}
+                      </div>
+                    ))}
+                    {topic.content.length > 2 && (
+                      <div style={{ fontSize: "12px", color: "#666", padding: "4px 0" }}>
+                        + {topic.content.length - 2} aur...
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div>
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "15px",
+              marginBottom: "30px",
+              background: "rgba(255,255,255,0.05)",
+              padding: "20px",
+              borderRadius: "16px",
+              border: `2px solid ${selectedTopic.color}33`
+            }}>
+              <div style={{ fontSize: "48px" }}>{selectedTopic.emoji}</div>
+              <div>
+                <h2 style={{
+                  margin: 0,
+                  fontSize: "clamp(18px, 3vw, 28px)",
+                  color: selectedTopic.color,
+                  fontWeight: "900"
+                }}>{selectedTopic.title}</h2>
+                <p style={{ margin: "4px 0 0", color: "#aaa", fontSize: "14px" }}>
+                  {selectedTopic.content.length} sections • Har section mein code + example hai
+                </p>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              {selectedTopic.content.map((section, sIdx) => (
+                <div key={sIdx} style={{
+                  background: "rgba(255,255,255,0.04)",
+                  borderRadius: "16px",
+                  border: `1px solid rgba(255,255,255,0.1)`,
+                  overflow: "hidden"
+                }}>
+                  {/* Section Header */}
+                  <div
+                    onClick={() => setExpandedSection(expandedSection === sIdx ? null : sIdx)}
+                    style={{
+                      padding: "20px 24px",
+                      cursor: "pointer",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      background: expandedSection === sIdx ? `${selectedTopic.color}22` : "transparent",
+                      transition: "background 0.3s"
+                    }}
+                  >
+                    <h3 style={{
+                      margin: 0,
+                      fontSize: "18px",
+                      fontWeight: "700",
+                      color: expandedSection === sIdx ? selectedTopic.color : "#fff"
+                    }}>
+                      {sIdx + 1}. {section.heading}
+                    </h3>
+                    <span style={{
+                      fontSize: "20px",
+                      transform: expandedSection === sIdx ? "rotate(180deg)" : "rotate(0)",
+                      transition: "transform 0.3s",
+                      color: selectedTopic.color
+                    }}>▼</span>
+                  </div>
+
+                  {expandedSection === sIdx && (
+                    <div style={{ padding: "0 24px 24px" }}>
+                      {/* Theory */}
+                      <div style={{
+                        background: "rgba(77, 150, 255, 0.08)",
+                        border: "1px solid rgba(77, 150, 255, 0.2)",
+                        borderRadius: "12px",
+                        padding: "20px",
+                        marginBottom: "20px"
+                      }}>
+                        <div style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                          marginBottom: "12px"
+                        }}>
+                          <span style={{ fontSize: "20px" }}>💡</span>
+                          <strong style={{ color: "#4d96ff", fontSize: "14px", textTransform: "uppercase", letterSpacing: "1px" }}>
+                            Theory (Samjho pehle)
+                          </strong>
+                        </div>
+                        <p style={{
+                          margin: 0,
+                          lineHeight: "1.8",
+                          color: "#ddd",
+                          fontSize: "15px"
+                        }}>{section.theory}</p>
+                      </div>
+
+                      {/* Code */}
+                      <div style={{
+                        background: "#1a1a2e",
+                        border: "1px solid rgba(107, 203, 119, 0.3)",
+                        borderRadius: "12px",
+                        marginBottom: "20px",
+                        overflow: "hidden"
+                      }}>
+                        <div style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          padding: "12px 20px",
+                          background: "rgba(107, 203, 119, 0.1)",
+                          borderBottom: "1px solid rgba(107, 203, 119, 0.2)"
+                        }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                            <span style={{ fontSize: "18px" }}>💻</span>
+                            <strong style={{ color: "#6bcb77", fontSize: "14px", textTransform: "uppercase", letterSpacing: "1px" }}>
+                              Code Example
+                            </strong>
+                          </div>
+                          <button
+                            onClick={() => copyCode(section.code, `${sIdx}`)}
+                            style={{
+                              padding: "6px 14px",
+                              borderRadius: "20px",
+                              border: "1px solid rgba(107,203,119,0.4)",
+                              background: copiedCode === `${sIdx}` ? "#6bcb77" : "transparent",
+                              color: copiedCode === `${sIdx}` ? "#000" : "#6bcb77",
+                              cursor: "pointer",
+                              fontSize: "12px",
+                              fontWeight: "bold",
+                              transition: "all 0.2s"
+                            }}
+                          >
+                            {copiedCode === `${sIdx}` ? "✅ Copied!" : "📋 Copy"}
+                          </button>
+                        </div>
+                        <pre style={{
+                          margin: 0,
+                          padding: "20px",
+                          overflowX: "auto",
+                          fontSize: "13px",
+                          lineHeight: "1.7",
+                          color: "#e0e0e0",
+                          fontFamily: "'Fira Code', 'Consolas', 'Courier New', monospace"
+                        }}>
+                          {section.code.split("\n").map((line, li) => {
+                            let color = "#e0e0e0";
+                            const trimmed = line.trim();
+                            if (trimmed.startsWith("#")) color = "#888";
+                            else if (trimmed.startsWith("def ") || trimmed.startsWith("class ")) color = "#4d96ff";
+                            else if (trimmed.startsWith("print(") || trimmed.startsWith("return ")) color = "#6bcb77";
+                            else if (trimmed.startsWith("if ") || trimmed.startsWith("elif ") || trimmed.startsWith("else:") || trimmed.startsWith("for ") || trimmed.startsWith("while ")) color = "#ffd93d";
+                            else if (trimmed.startsWith("import ") || trimmed.startsWith("from ")) color = "#ff6b35";
+                            
+                            return (
+                              <span key={li} style={{ color, display: "block" }}>
+                                {line || " "}
+                              </span>
+                            );
+                          })}
+                        </pre>
+                      </div>
+
+                      {/* Example */}
+                      <div style={{
+                        background: "rgba(255, 217, 61, 0.08)",
+                        border: "1px solid rgba(255, 217, 61, 0.25)",
+                        borderRadius: "12px",
+                        padding: "20px"
+                      }}>
+                        <div style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                          marginBottom: "10px"
+                        }}>
+                          <span style={{ fontSize: "20px" }}>🌍</span>
+                          <strong style={{ color: "#ffd93d", fontSize: "14px", textTransform: "uppercase", letterSpacing: "1px" }}>
+                            Real-World Example
+                          </strong>
+                        </div>
+                        <p style={{
+                          margin: 0,
+                          lineHeight: "1.7",
+                          color: "#ddd",
+                          fontSize: "14px",
+                          fontStyle: "italic"
+                        }}>{section.example}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Navigation */}
+            <div style={{
+              marginTop: "40px",
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "15px",
+              flexWrap: "wrap"
+            }}>
+              {topics[topics.findIndex(t => t.id === selectedTopic.id) - 1] && (
+                <button
+                  onClick={() => {
+                    const idx = topics.findIndex(t => t.id === selectedTopic.id);
+                    setSelectedTopic(topics[idx - 1]);
+                    setExpandedSection(null);
+                  }}
+                  style={{
+                    padding: "12px 24px",
+                    borderRadius: "25px",
+                    border: "2px solid rgba(255,255,255,0.2)",
+                    background: "transparent",
+                    color: "#fff",
+                    cursor: "pointer",
+                    fontSize: "14px",
+                    fontWeight: "bold"
+                  }}
+                >
+                  ← Pichla Topic
+                </button>
+              )}
+              <button
+                onClick={() => setSelectedTopic(null)}
+                style={{
+                  padding: "12px 24px",
+                  borderRadius: "25px",
+                  border: "none",
+                  background: `linear-gradient(135deg, ${selectedTopic.color}, ${selectedTopic.color}88)`,
+                  color: "#000",
+                  cursor: "pointer",
+                  fontSize: "14px",
+                  fontWeight: "bold"
+                }}
+              >
+                📚 Sab Topics Dekho
+              </button>
+              {topics[topics.findIndex(t => t.id === selectedTopic.id) + 1] && (
+                <button
+                  onClick={() => {
+                    const idx = topics.findIndex(t => t.id === selectedTopic.id);
+                    setSelectedTopic(topics[idx + 1]);
+                    setExpandedSection(null);
+                  }}
+                  style={{
+                    padding: "12px 24px",
+                    borderRadius: "25px",
+                    border: "2px solid rgba(255,255,255,0.2)",
+                    background: "transparent",
+                    color: "#fff",
+                    cursor: "pointer",
+                    fontSize: "14px",
+                    fontWeight: "bold"
+                  }}
+                >
+                  Agla Topic →
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div style={{
+        textAlign: "center",
+        padding: "30px",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        color: "#555",
+        fontSize: "13px",
+        marginTop: "40px"
+      }}>
+        <p style={{ margin: 0 }}>
+          Made with ❤️ • Sheryians Coding School • Python Hinglish Handbook<br />
+          <span style={{ color: "#333" }}>Har concept, har code, har example — kuch nahi chhoota! 🐍</span>
+        </p>
+      </div>
+    </div>
+  );
+}
